@@ -4,6 +4,7 @@ html
     title Image Gallery :: Backbone.js Screencast
 
     link(rel='stylesheet', href='/css/imagegallery.css', type='text/css')
+    link(rel='stylesheet', href='/css/bootstrap.css', type='text/css')
 
     script(src='/js/vendor/json2.js')
     script(src='/js/vendor/jquery.js')
@@ -86,11 +87,20 @@ html
       });
 
   body
-    #container
-      #header
-        ul#menu
-          li
-            a(href='#images/new') Add Image
+    .navbar.navbar-static-top
+      .navbar-inner
+        .container
+          .brand
+            logo
+          ul.nav
+            li
+              a(href="#images/new") Add Image
+
+    .container
+      .row
+        .span1 &nbsp;
+        .span10
+
       #main
         block content
       #sidebar
