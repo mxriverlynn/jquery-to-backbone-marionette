@@ -131,6 +131,8 @@ ImageGallery.AddEditImageView = Backbone.View.extend({
 
   saveImage: function(e){
     e.preventDefault();
+    var data = Backbone.Syphon.serialize(this);
+    this.model.set(data);
     this.model.save(undefined, {
       success: this.saveSuccess,
       error: this.saveError
