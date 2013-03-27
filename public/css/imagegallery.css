@@ -1,19 +1,9 @@
 body{
-  background-color: #eee;
+  background-color: #555;
 }
 
 a{
   color: #00007f;
-}
-
-#main {
-  float: left;
-  width: 495px;
-  height: 450px;
-  background-color: #ddd;
-  margin: 0px;
-  padding: 0px 10px 0px 10px;
-  overflow: scroll;
 }
 
 #header {
@@ -38,26 +28,23 @@ a{
   font-weight: bold;
 }
 
-#sidebar{
-  float: right;
-  width: 190px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: #ccc;
+.content-container{
+  width: 100%;
+  padding: 20px 0px;
+  background-color: #fff;
 }
 
-#image-list{
-  display: block;
-  width: 200px;
-  height: 300px;
-  height: 450px;
-  overflow: scroll;
+.content-row {
+  background-color: #eee;
+}
+
+#sidebar{
+  background-color: #ccc;
 }
 
 #image-list ul{
   list-style: none;
   padding: 0px;
-  width: 170px;
   font-size: 9pt;
   text-align: center;
 }
@@ -95,17 +82,14 @@ a{
   height: 65px;
 }
 
-#footer{
-  clear: both;
-  padding: 2px;
-  font-size: 8pt;
+footer{
   text-align: right;
   color: #fff;
-  background-color: #555;
 }
 
-#footer a {
+footer a {
   color: #fff;
+  text-decoration: underline;
 }
 
 .image-not-found h2 {

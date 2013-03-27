@@ -3,8 +3,8 @@ html
   head
     title Image Gallery :: Backbone.js Screencast
 
-    link(rel='stylesheet', href='/css/imagegallery.css', type='text/css')
     link(rel='stylesheet', href='/css/bootstrap.css', type='text/css')
+    link(rel='stylesheet', href='/css/imagegallery.css', type='text/css')
 
     script(src='/js/vendor/json2.js')
     script(src='/js/vendor/jquery.js')
@@ -87,25 +87,28 @@ html
       });
 
   body
-    .navbar.navbar-static-top
+    header.navbar.navbar-static-top
       .navbar-inner
         .container
-          .brand
-            logo
+          .brand Image Gallery
           ul.nav
             li
               a(href="#images/new") Add Image
 
-    .container
+    section.content-container
+      .container
+        .row.content-row
+          article.span8#main
+            block content
+          sidebar.span4#sidebar
+            #image-list
+
+    section.container
       .row
         .span1 &nbsp;
         .span10
 
-      #main
-        block content
-      #sidebar
-        #image-list
-      #footer
-        | Copyright ©2011 
-        a(href='http://www.pragprog.om') The Pragmatic Programmers
-        | .
+    footer
+      .container
+        .row
+          .span12.pull-right
