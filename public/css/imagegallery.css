@@ -15,7 +15,6 @@ a{
 }
 
 .content-container{
-  width: 100%;
   padding: 20px 0px;
   background-color: #fff;
 }
@@ -29,16 +28,19 @@ a{
   overflow: scroll;
 }
 
+#image-list {
+}
+
 #image-list ul{
   text-align: left;
   float: none;
   list-style: none;
-  padding: 0px;
+  padding: 0px 10px 0px 5px;
   margin: 0px;
   font-size: 9pt;
   overflow-x: auto;
   overflow-y: hidden;
-  height: 115px;
+  height: 120px;
   white-space: no-wrap;
 }
 
