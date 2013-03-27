@@ -16,22 +16,31 @@ html
 
     script#image-preview-template(type='text/html')
       a(href='#')
-        img(src!='<%= url %>', width='150', height='100', alt!='<%= description %>')
-        span.image-label <%= name %>
+        img(src!='<%= url %>', width='150', height='100', alt!='<%= name %>: <%= description %>')
 
     script#image-view-template(type='text/html')
-      h2 <%= name %>
-      .nav-next
-        a(href='#') &lt;
-      .nav-previous
-        a(href='#') &gt;
-      img(src!='<%= url %>', width='300', height='200', alt!='<%= description %>')
-      .image-footer
-        .description <%= description %>
-        .edit
+      .row
+        .span10.offset1
+          h2 <%= name %>
+        .span1.edit
           a.btn.btn-link(href!='#images/<%= id %>/edit') 
             i.icon-edit
             | Edit
+      .row
+        .span1
+          .nav-next
+            a(href='#') &lt;
+        .span10
+          .row
+            .span10
+              img(src!='<%= url %>', width='300', height='200', alt!='<%= description %>')
+          .row
+            .span4.offset3
+              .image-footer
+                .description <%= description %>
+        .span1
+          .nav-previous
+            a(href='#') &gt;
 
     script#edit-image-template(type='text/html')
       h1 Edit Image <%= id %>

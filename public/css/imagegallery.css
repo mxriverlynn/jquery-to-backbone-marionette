@@ -38,14 +38,16 @@ a{
   font-size: 9pt;
   overflow-x: auto;
   overflow-y: hidden;
-  width: 2000px;
-  height: 150px;
+  height: 115px;
   white-space: no-wrap;
 }
 
 #image-list ul li{
   display: inline-block;
   padding-bottom: 10px
+}
+
+#image-list ul li a{
   text-align: center;
 }
 
@@ -61,6 +63,10 @@ a{
 
 #image-list .image-label{
   display: block;
+}
+
+#add-image-form {
+  margin: 0px auto;
 }
 
 #add-image-form img{
@@ -138,15 +144,11 @@ footer a {
 }
 
 .image-view {
-  width: 450px;
-  height: 415px;
   margin: 0px auto;
   text-align: center;
 }
 
 .image-view .image-title{
-  display: block;
-  clear: both;
   background-color: #ff0faf;
 }
 
@@ -159,14 +161,6 @@ footer a {
   margin-top: 60px;
   font-size: 48pt;
   font-weight: bold;
-}
-
-.image-view .nav-next {
-  float: left;
-}
-
-.image-view .nav-previous {
-  float: right;
 }
 
 .image-view h2 {
@@ -185,24 +179,19 @@ footer a {
 }
 
 .image-view .description{
-  width: 300px;
   margin: 15px auto;
   text-align: left;
 }
 
-.image-view .image-footer .description {
-  width: 225px;
-  float: left;
-  margin-left: 75px;
+.image-view .edit {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 15px 0px 0px 0px;
+  margin-left: 5px;
+  text-align: center;
 }
 
-.image-view .image-footer .edit{
-  float: right;
-  width: 75px;
-  margin-right: 75px;
-}
-
-.image-view .image-footer .edit a{
+.image-view .edit a{
   text-decoration: underline;
 }
 

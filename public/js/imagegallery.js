@@ -41,7 +41,7 @@ ImageGallery.ImageCollection = Backbone.Collection.extend({
     }
   },
 
-  previousImage: function(){
+  nextImage: function(){
     var index = this.indexOf(this.selectedImage);
     if (index > 0){
       index -= 1;
@@ -52,7 +52,7 @@ ImageGallery.ImageCollection = Backbone.Collection.extend({
     image.select();
   },
 
-  nextImage: function(){
+  previousImage: function(){
     var index = this.indexOf(this.selectedImage);
     if (index < this.length - 1){
       index += 1;
@@ -76,7 +76,7 @@ ImageGallery.ImageCollection = Backbone.Collection.extend({
   }
 });
 
-ImageGallery.AddEditImageView = Backbone.View.extend({
+ImageGallery.AddEditImageView = Marionette.ItemView.extend({
   id: "add-image-form",
 
   events: {
@@ -148,17 +148,8 @@ ImageGallery.AddEditImageView = Backbone.View.extend({
 
   saveError: function(image, response){
     ImageGallery.showError("Error Saving Image");
-  },
-
-  render: function(){
-    var data;
-    if (this.model){
-      data = this.model.toJSON();
-    }
-    var template = $(this.template).html();
-    var html = _.template(template, data);
-    $(this.el).html(html);
   }
+
 });
 
 ImageGallery.ImagePreview = Marionette.ItemView.extend({
@@ -199,7 +190,17 @@ ImageGallery.ImagePreview = Marionette.ItemView.extend({
 
 ImageGallery.ImageListView = Marionette.CollectionView.extend({
   tagName: "ul",
-  itemView: ImageGallery.ImagePreview
+  itemView: ImageGallery.ImagePreview,
+
+  initialize: function(){
+    this.on("before:item:added", this.adjustScrollSize, this);
+    this.on("item:removed", this.adjustScrollSize, this);
+  },
+
+  adjustScrollSize: function(){
+    var newWidth = this.collection.length * 160;
+    this.$el.css({width: newWidth + "px"});
+  }
 });
 
 ImageGallery.ImageView = Backbone.View.extend({
