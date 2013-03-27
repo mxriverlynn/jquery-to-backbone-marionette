@@ -15,10 +15,9 @@ html
     script(src='/js/imagegallery.js')
 
     script#image-preview-template(type='text/html')
-      li
-        a(href='#')
-          img(src!='<%= url %>', width='150', height='100', alt!='<%= description %>')
-          span.image-label <%= name %>
+      a(href='#')
+        img(src!='<%= url %>', width='150', height='100', alt!='<%= description %>')
+        span.image-label <%= name %>
 
     script#image-view-template(type='text/html')
       h2 <%= name %>
@@ -30,29 +29,42 @@ html
       .image-footer
         .description <%= description %>
         .edit
-          a.btn(href!='#images/<%= id %>/edit') Edit
+          a.btn.btn-link(href!='#images/<%= id %>/edit') 
+            i.icon-edit
+            | Edit
 
     script#edit-image-template(type='text/html')
       h1 Edit Image <%= id %>
-      ul
-        li
-          label(for!='image-url') Image Url: 
-          input#url(type='text', name='url', value!='<%= url %>')
-        li
-          label(for='preview') Preview: 
-          #image-preview
-            img#preview(src!='<%= url %>')
-        li
-          label(for='name') Image Name: 
-          input#name(type='text', name='name', value!='<%= name %>')
-        li
-          label(for='description') Description: 
-          textarea#description(name='description') <%= description %>
-        li.save-cancel
-          #delete-image
-            a#delete(href='#') delete
-          a#cancel(href!='#images/<%= id %>') cancel
-          input#save(type='submit', name='Save', value='Save')
+      form.form-horizontal
+        .control-group
+          label.control-label(for='image-url') Image Url: 
+          .controls
+            input#url(type='text', name='url', value!='<%= url %>')
+        .control-group
+          label.control-label(for='preview') Preview: 
+          .controls
+            #image-preview
+              img#preview(src!='<%= url %>')
+        .control-group
+          label.control-label(for='name') Image Name: 
+          .controls
+            input#name(type='text', name='name', value!='<%= name %>')
+        .control-group
+          label.control-label(for='description') Description: 
+          .controls
+            textarea#description(name='description') <%= description %>
+        .control-group
+          .controls
+            a.btn.btn-link#cancel(href='/') 
+              i.icon-ban-circle
+              |&nbsp;cancel
+            button.btn.btn-primary#save(type='submit', name='Save', value='Save') 
+              i.icon-ok-sign.icon-white
+              |&nbsp;Save
+            &nbsp;
+            button.btn.btn-danger#delete(type="submit", name="Delete", value="Delete") 
+              i.icon-remove-circle.icon-white
+              |&nbsp;Delete
 
     script#add-image-template(type='text/html')
       h1 Add Image
@@ -76,8 +88,12 @@ html
             textarea#description(name='description')
         .control-group
           .controls
-            button.btn.btn-primary#save(type='submit', name='Save', value='Save') Save
-            a.btn.btn-link#cancel(href='/') cancel
+            a.btn.btn-link#cancel(href='/') 
+              i.icon-ban-circle
+              |&nbsp;cancel
+            button.btn.btn-primary#save(type='submit', name='Save', value='Save') 
+              i.icon-ok-sign.icon-white
+              |&nbsp;Save
 
     script#error-view-template(type='text/html')
       h1 Error
@@ -99,15 +115,18 @@ html
           .brand Image Gallery
           ul.nav
             li
-              a(href="#images/new") Add Image
+              a(href="#images/new") 
+                i.icon-plus
+                | Add Image
 
     section.content-container
       .container
-        .row.content-row
-          article.span8#main
-            block content
-          sidebar.span4#sidebar
+        .row.content-row.image-list-container
+          navigation.span12
             #image-list
+        .row.content-row
+          article.span12#main
+            block content
 
     section.container
       .row

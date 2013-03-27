@@ -14,20 +14,6 @@ a{
   color: #ffffff;
 }
 
-#header ul {
-  list-style: none;
-  margin: 0px;
-  padding: 5px;
-}
-
-#header ul li {
-  display: inline;
-  margin: 0px;
-  padding-left: 15px;
-  padding-right: 15px;
-  font-weight: bold;
-}
-
 .content-container{
   width: 100%;
   padding: 20px 0px;
@@ -38,19 +24,29 @@ a{
   background-color: #eee;
 }
 
-#sidebar{
+.image-list-container{
   background-color: #ccc;
+  overflow: scroll;
 }
 
 #image-list ul{
+  text-align: left;
+  float: none;
   list-style: none;
   padding: 0px;
+  margin: 0px;
   font-size: 9pt;
-  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 2000px;
+  height: 150px;
+  white-space: no-wrap;
 }
 
 #image-list ul li{
+  display: inline-block;
   padding-bottom: 10px
+  text-align: center;
 }
 
 #image-list img {
@@ -204,7 +200,10 @@ footer a {
   float: right;
   width: 75px;
   margin-right: 75px;
-  background-color: #bfbfbf;
+}
+
+.image-view .image-footer .edit a{
+  text-decoration: underline;
 }
 
 #image-url label{

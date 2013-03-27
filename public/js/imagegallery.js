@@ -161,28 +161,11 @@ ImageGallery.AddEditImageView = Backbone.View.extend({
   }
 });
 
-ImageGallery.ImageListView = Backbone.View.extend({
-  tagName: "ul",
+ImageGallery.ImagePreview = Marionette.ItemView.extend({
+  tagName: "li",
 
-  initialize: function(){
-    _.bindAll(this, "renderImage");
-    this.collection.bind("add", this.renderImage, this);
-  },
+  className: "image-list-preview",
 
-  renderImage: function(image){
-    var imagePreview = new ImageGallery.ImagePreview({
-      model: image
-    });
-    imagePreview.render();
-    $(this.el).prepend(imagePreview.el);
-  },
-
-  render: function(){
-    this.collection.each(this.renderImage);
-  }
-});
-
-ImageGallery.ImagePreview = Backbone.View.extend({
   template: "#image-preview-template",
 
   events: {
@@ -211,13 +194,12 @@ ImageGallery.ImagePreview = Backbone.View.extend({
   imageClicked: function(e){
     e.preventDefault();
     this.model.select();
-  },
-
-  render: function(){
-    var template = $(this.template).html();
-    var html = _.template(template, this.model.toJSON());
-    $(this.el).html(html);
   }
+});
+
+ImageGallery.ImageListView = Marionette.CollectionView.extend({
+  tagName: "ul",
+  itemView: ImageGallery.ImagePreview
 });
 
 ImageGallery.ImageView = Backbone.View.extend({
