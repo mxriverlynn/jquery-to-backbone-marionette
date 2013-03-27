@@ -7,11 +7,6 @@ ImageGallery.addRegions({
 ImageGallery.Image = Backbone.Model.extend({
   urlRoot: "/images",
 
-  initialize: function(){
-    var memento = new Backbone.Memento(this);
-    _.extend(this, memento);
-  },
-
   select: function(){
     if (!this.get("selected")){
       this.set({selected: true}, {silent: true});
@@ -96,7 +91,6 @@ ImageGallery.AddEditImageView = Backbone.View.extend({
   initialize: function(options){
     _.bindAll(this, "saveSuccess", "saveError");
     this.template = options.template;
-    this.model.store();
   },
 
   nameChanged: function(e){
@@ -128,7 +122,6 @@ ImageGallery.AddEditImageView = Backbone.View.extend({
 
   cancel: function(e){
     e.preventDefault();
-    this.model.restore();
     if (this.model.isNew()){
       this.render();
     } else {
