@@ -109,7 +109,7 @@ footer a {
   height: 200px;
   background-image: url('/img/Select%20Image.png');
   background-repeat: no-repeat;
-  background-position: 100px 0px;
+  background-position: 0px 0px;
 }
 
 #add-image-form #image-preview img {
@@ -139,11 +139,6 @@ footer a {
 
 #add-image-form .save-cancel {
   text-align: right;
-}
-
-#add-image-form .save-cancel #save {
-  width: 50px;
-  margin-right: 50px;
 }
 
 .image-view {

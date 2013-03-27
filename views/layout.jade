@@ -29,7 +29,7 @@ html
       .image-footer
         .description <%= description %>
         .edit
-          a(href!='#images/<%= id %>/edit') Edit
+          a.btn(href!='#images/<%= id %>/edit') Edit
 
     script#edit-image-template(type='text/html')
       h1 Edit Image <%= id %>
@@ -55,23 +55,28 @@ html
 
     script#add-image-template(type='text/html')
       h1 Add Image
-      ul
-        li
-          label(for='image-url') Image Url: 
-          input#url(type='text', name='url')
-        li
-          label(for='preview') Preview: 
-          #image-preview
-            img#preview
-        li
-          label(for='name') Image Name: 
-          input#name(type='text', name='name')
-        li
-          label(for='description') Description: 
-          textarea#description(name='description')
-        li.save-cancel
-          a#cancel(href='/') cancel
-          input#save(type='submit', name='Save', value='Save')
+      form.form-horizontal
+        .control-group
+          label.control-label(for='image-url') Image Url: 
+          .controls
+            input#url(type='text', name='url')
+        .control-group
+          label.control-label(for='preview') Preview: 
+          .controls
+            #image-preview
+              img#preview
+        .control-group
+          label.control-label(for='name') Image Name: 
+          .controls
+            input#name(type='text', name='name')
+        .control-group
+          label.control-label(for='description') Description: 
+          .controls
+            textarea#description(name='description')
+        .control-group
+          .controls
+            button.btn.btn-primary#save(type='submit', name='Save', value='Save') Save
+            a.btn.btn-link#cancel(href='/') cancel
 
     script#error-view-template(type='text/html')
       h1 Error
