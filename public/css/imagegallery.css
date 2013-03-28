@@ -28,19 +28,16 @@ a{
   overflow: scroll;
 }
 
-#image-list {
-}
-
 #image-list ul{
   text-align: left;
   float: none;
   list-style: none;
-  padding: 0px 10px 0px 5px;
+  padding: 5px 10px 0px 5px;
   margin: 0px;
   font-size: 9pt;
   overflow-x: auto;
   overflow-y: hidden;
-  height: 120px;
+  height: 125px;
   white-space: no-wrap;
 }
 

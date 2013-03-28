@@ -12,7 +12,14 @@ html
     script(src='/js/vendor/backbone.js')
     script(src='/js/vendor/backbone.syphon.js')
     script(src='/js/vendor/backbone.marionette.js')
+
     script(src='/js/imagegallery.js')
+    script(src='/js/router.js')
+    script(src='/js/entities.js')
+    script(src='/js/imageList.js')
+    script(src='/js/showImage.js')
+    script(src='/js/addEdit.js')
+    script(src='/js/showError.js')
 
     script#image-preview-template(type='text/html')
       a(href='#')
@@ -44,8 +51,15 @@ html
 
     script#edit-image-template(type='text/html')
       .row
-        .span7.offset2
+        .span5.offset2
           h1 Edit Image <%= id %>
+        .span2
+          br
+          button.btn.btn-danger#delete(type="submit", name="Delete", value="Delete") 
+            i.icon-remove-circle.icon-white
+            |&nbsp;Delete
+      .row
+        .span7.offset2
           form.form-horizontal
             .control-group
               label.control-label(for='image-url') Image Url: 
@@ -66,16 +80,12 @@ html
                 textarea#description(name='description') <%= description %>
             .control-group
               .controls
-                a.btn.btn-link#cancel(href='/') 
-                  i.icon-ban-circle
-                  |&nbsp;cancel
                 button.btn.btn-primary#save(type='submit', name='Save', value='Save') 
                   i.icon-ok-sign.icon-white
                   |&nbsp;Save
-                &nbsp;
-                button.btn.btn-danger#delete(type="submit", name="Delete", value="Delete") 
-                  i.icon-remove-circle.icon-white
-                  |&nbsp;Delete
+                a.btn.btn-link#cancel(href='/') 
+                  i.icon-ban-circle
+                  |&nbsp;cancel
 
     script#add-image-template(type='text/html')
       .row
@@ -101,12 +111,14 @@ html
                 textarea#description(name='description')
             .control-group
               .controls
-                a.btn.btn-link#cancel(href='/') 
-                  i.icon-ban-circle
-                  |&nbsp;cancel
+
                 button.btn.btn-primary#save(type='submit', name='Save', value='Save') 
                   i.icon-ok-sign.icon-white
                   |&nbsp;Save
+
+                a.btn.btn-link#cancel(href='/') 
+                  i.icon-ban-circle
+                  |&nbsp;cancel
 
     script#error-view-template(type='text/html')
       h1 Error
