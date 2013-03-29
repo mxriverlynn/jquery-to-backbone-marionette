@@ -57,7 +57,10 @@ ImageGallery.AddEditImage = {
     _.bindAll(this, "saveNewImage", "showImagePreview", "addClicked");
 
     this.addImageTemplate = _.template($("#add-image-template").html());
+
     this.$main = $("#main");
+    this.$main.on("change", "#url", this.showImagePreview);
+    this.$main.on("click", "#save", this.saveNewImage);
 
     $("a.add-image").click(this.addClicked);
   },
@@ -72,8 +75,6 @@ ImageGallery.AddEditImage = {
     var addForm = this.addImageTemplate();
     this.$main.html(addForm);
 
-    this.$main.on("change", "#url", this.showImagePreview);
-    this.$main.on("click", "#save", this.saveNewImage);
   },
 
   showImagePreview: function(e){
