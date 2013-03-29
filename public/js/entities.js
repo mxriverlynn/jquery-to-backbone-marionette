@@ -21,17 +21,7 @@ ImageGallery.ImageCollection = Backbone.Collection.extend({
     ImageGallery.vent.bind("image:previous", this.previousImage, this);
     ImageGallery.vent.bind("image:next", this.nextImage, this);
 
-    this.bind("remove", this.imageDeleted, this);
-
     Backbone.Picky.SingleSelect.mixInto(this);
-  },
-
-  imageDeleted: function(){
-    if (this.length > 0){
-      this.previousImage();
-    } else {
-      this.trigger("cleared");
-    }
   },
 
   previousImage: function(){

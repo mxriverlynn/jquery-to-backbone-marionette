@@ -1,5 +1,7 @@
 ImageGallery.Controller = Marionette.Controller.extend({
   initialize: function(options){
+    _.bindAll(this, "deleteSuccess", "deleteError");
+
     this.collection = options.collection;
     this.region = options.region;
 
@@ -36,13 +38,21 @@ ImageGallery.Controller = Marionette.Controller.extend({
 
       editImageView.on("image:deleted", function(image){
         image.destroy({
-          success: function(){},
+          success: this.deleteSuccess,
           error: this.deleteError
         });
       }, this);
 
       this.region.show(editImageView);
     });
+  },
+
+  deleteSuccess: function(){
+    if (this.collection.length > 0){
+      this.collection.previousImage();
+    } else {
+      this.newImage();
+    }
   },
 
   deleteError: function(image, response){
