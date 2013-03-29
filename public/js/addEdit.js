@@ -62,10 +62,7 @@ ImageGallery.AddEditImageView = Marionette.ItemView.extend({
   },
 
   saveSuccess: function(image, response){
-    if (this.collection && !this.collection.include(image)){
-      this.collection.add(image);
-    }
-    image.select();
+    this.trigger("image:added", image);
   },
 
   saveError: function(image, response){
@@ -74,22 +71,3 @@ ImageGallery.AddEditImageView = Marionette.ItemView.extend({
 
 });
 
-ImageGallery.addImage = function(images){
-  images.deselect();
-
-  var image = new ImageGallery.Image();
-  var addImageView = new ImageGallery.AddEditImageView({
-    model: image,
-    collection: images,
-    template: "#add-image-template"
-  });
-  ImageGallery.mainRegion.show(addImageView);
-}
-
-ImageGallery.editImage = function(image){
-  var editImageView = new ImageGallery.AddEditImageView({
-    model: image,
-    template: "#edit-image-template"
-  });
-  ImageGallery.mainRegion.show(editImageView);
-}

@@ -23,10 +23,3 @@ ImageGallery.ImageView = Backbone.View.extend({
     $(this.el).html(html);
   }
 });
-
-ImageGallery.showImage = function(image){
-  var imageView = new ImageGallery.ImageView({
-    model: image
-  });
-  ImageGallery.mainRegion.show(imageView);
-}

@@ -1,50 +1,72 @@
-ImageGallery.ImagePreview = Marionette.ItemView.extend({
-  tagName: "li",
+ImageGallery.module("ImageList", function(Mod, App, Backbone, Marionette, $, _){
 
-  className: "image-list-preview",
+  var ImagePreview = Marionette.ItemView.extend({
+    tagName: "li",
 
-  template: "#image-preview-template",
+    className: "image-list-preview",
 
-  events: {
-    "click a": "imageClicked",
-  },
+    template: "#image-preview-template",
 
-  initialize: function(){
-    this.model.bind("selected", this.imageSelected, this);
-    this.model.bind("deselected", this.imageDeselected, this);
-    this.model.bind("change", this.render, this);
-    this.model.bind("remove", this.imageDeleted, this);
-  },
+    triggers: {
+      "click a": "image:selected"
+    },
 
-  imageDeleted: function(){
-    this.remove();
-  },
+    initialize: function(){
+      this.model.bind("model:selected", this.imageSelected, this);
+      this.model.bind("model:deselected", this.imageDeselected, this);
+      this.model.bind("change", this.render, this);
+    },
 
-  imageSelected: function(){
-    this.$("img").addClass("selected");
-  },
+    imageSelected: function(){
+      this.$("img").addClass("selected");
+    },
 
-  imageDeselected: function(){
-    this.$("img").removeClass("selected");
-  },
+    imageDeselected: function(){
+      this.$("img").removeClass("selected");
+    }
+  });
 
-  imageClicked: function(e){
-    e.preventDefault();
-    this.model.select();
-  }
-});
+  var ImageListView = Marionette.CollectionView.extend({
+    tagName: "ul",
+    itemView: ImagePreview,
 
-ImageGallery.ImageListView = Marionette.CollectionView.extend({
-  tagName: "ul",
-  itemView: ImageGallery.ImagePreview,
+    initialize: function(){
+      this.on("before:item:added", this.adjustScrollSize, this);
+      this.on("item:removed", this.adjustScrollSize, this);
+    },
 
-  initialize: function(){
-    this.on("before:item:added", this.adjustScrollSize, this);
-    this.on("item:removed", this.adjustScrollSize, this);
-  },
+    adjustScrollSize: function(){
+      var newWidth = this.collection.length * 160;
+      this.$el.css({width: newWidth + "px"});
+    }
+  });
 
-  adjustScrollSize: function(){
-    var newWidth = this.collection.length * 160;
-    this.$el.css({width: newWidth + "px"});
-  }
+  var Controller = Marionette.Controller.extend({
+    initialize: function(options){
+      this.region = options.region;
+      this.images = options.images;
+    },
+
+    show: function(){
+      var imageListView = new ImageListView({
+        collection: this.images
+      });
+
+      this.listenTo(imageListView, "itemview:image:selected", function(options){
+        options.model.select();
+      });
+
+      ImageGallery.imageList.show(imageListView);
+    }
+  });
+
+  this.addInitializer(function(options){
+    var controller = new Controller({
+      region: ImageGallery.imageList,
+      images: options.images
+    });
+
+    controller.show();
+  });
+
 });

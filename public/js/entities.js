@@ -1,18 +1,14 @@
 ImageGallery.Image = Backbone.Model.extend({
   urlRoot: "/images",
 
-  select: function(){
-    if (!this.get("selected")){
-      this.set({selected: true}, {silent: true});
-      this.trigger("selected");
-      this.collection.select(this);
-    }
-    ImageGallery.vent.trigger("image:selected", this);
+  initialize: function(){
+    Backbone.Picky.Selectable.mixInto(this);
+
+    this.on("model:selected", this.imageSelected);
   },
 
-  deselect: function(){
-    this.unset("selected", {silent: true});
-    this.trigger("deselected");
+  imageSelected: function(){
+    ImageGallery.vent.trigger("model:selected", this);
   }
 });
 
@@ -24,7 +20,10 @@ ImageGallery.ImageCollection = Backbone.Collection.extend({
   initialize: function(){
     ImageGallery.vent.bind("image:previous", this.previousImage, this);
     ImageGallery.vent.bind("image:next", this.nextImage, this);
+
     this.bind("remove", this.imageDeleted, this);
+
+    Backbone.Picky.SingleSelect.mixInto(this);
   },
 
   imageDeleted: function(){
@@ -35,8 +34,8 @@ ImageGallery.ImageCollection = Backbone.Collection.extend({
     }
   },
 
-  nextImage: function(){
-    var index = this.indexOf(this.selectedImage);
+  previousImage: function(){
+    var index = this.indexOf(this.selected);
     if (index > 0){
       index -= 1;
     } else {
@@ -46,9 +45,8 @@ ImageGallery.ImageCollection = Backbone.Collection.extend({
     image.select();
   },
 
-  previousImage: function(){
-    console.log('previous');
-    var index = this.indexOf(this.selectedImage);
+  nextImage: function(){
+    var index = this.indexOf(this.selected);
     if (index < this.length - 1){
       index += 1;
     } else {
@@ -59,16 +57,10 @@ ImageGallery.ImageCollection = Backbone.Collection.extend({
   },
 
   select: function(image){
-    this.deselect();
-    this.selectedImage = image;
+    this.singleSelect.select(image);
   },
 
-  deselect: function(){
-    if (this.selectedImage){
-      this.selectedImage.deselect();
-      delete this.selectedImage;
-    }
+  deselect: function(image){
+    this.singleSelect.deselect(image);
   }
 });
-
-

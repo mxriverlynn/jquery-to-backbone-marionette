@@ -10,10 +10,12 @@ html
     script(src='/js/vendor/jquery.js')
     script(src='/js/vendor/underscore.js')
     script(src='/js/vendor/backbone.js')
+    script(src='/js/vendor/backbone.picky.js')
     script(src='/js/vendor/backbone.syphon.js')
     script(src='/js/vendor/backbone.marionette.js')
 
     script(src='/js/imagegallery.js')
+    script(src='/js/controller.js')
     script(src='/js/router.js')
     script(src='/js/entities.js')
     script(src='/js/imageList.js')
@@ -35,7 +37,7 @@ html
             | Edit
       .row
         .span1
-          .nav-next
+          .nav-previous
             a(href='#') &larr;
         .span10
           .row
@@ -46,7 +48,7 @@ html
               .image-footer
                 .description <%= description %>
         .span1
-          .nav-previous
+          .nav-next
             a(href='#') &rarr;
 
     script#edit-image-template(type='text/html')
