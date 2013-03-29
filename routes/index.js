@@ -4,23 +4,23 @@ exports.index = function(req, res){
 };
 
 exports.getImages = function(req, res){
-  res.send(images);
+  res.send(JSON.stringify(images));
 };
 
 exports.getImageById = function(req, res){
   var id = req.params.id;
   var image = getImageById(id);
-  res.send(image);
+  res.send(JSON.stringify(image));
 };
 
 exports.createImage = function(req, res){
   var image = createImage(req.body);
-  res.send(image);
+  res.send(JSON.stringify(image));
 };
 
 exports.updateImage = function (req, res){
   var image = updateImage(req.body);
-  res.send(image);
+  res.send(JSON.stringify(image));
 };
 
 exports.deleteImage = function(req, res){

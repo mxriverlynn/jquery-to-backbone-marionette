@@ -11,40 +11,36 @@ ImageGallery.Controller = Marionette.Controller.extend({
 
   },
   
-  showImage: function(id){
-    this._workWithImage(id, function(image){
-      image.select();
+  showImage: function(image){
+    image.select();
 
-      var imageView = new ImageGallery.ImageView({
-        model: image
-      });
-
-      this.region.show(imageView);
-
-      Backbone.history.navigate("images/" + image.id);
+    var imageView = new ImageGallery.ImageView({
+      model: image
     });
+
+    this.region.show(imageView);
+
+    Backbone.history.navigate("images/" + image.id);
   },
 
-  editImage: function(id){
-    this._workWithImage(id, function(image){
-      var editImageView = new ImageGallery.AddEditImageView({
-        model: image,
-        template: "#edit-image-template"
-      });
-
-      editImageView.on("image:added", function(image){
-        this.showImage(image);
-      }, this);
-
-      editImageView.on("image:deleted", function(image){
-        image.destroy({
-          success: this.deleteSuccess,
-          error: this.deleteError
-        });
-      }, this);
-
-      this.region.show(editImageView);
+  editImage: function(image){
+    var editImageView = new ImageGallery.AddEditImageView({
+      model: image,
+      template: "#edit-image-template"
     });
+
+    editImageView.on("image:added", function(image){
+      this.showImage(image);
+    }, this);
+
+    editImageView.on("image:deleted", function(image){
+      image.destroy({
+        success: this.deleteSuccess,
+        error: this.deleteError
+      });
+    }, this);
+
+    this.region.show(editImageView);
   },
 
   deleteSuccess: function(){
@@ -70,24 +66,14 @@ ImageGallery.Controller = Marionette.Controller.extend({
     });
 
     addImageView.on("image:added", function(image){
-      image.select();
-
       if (this.collection && !this.collection.include(image)){
         this.collection.add(image);
       }
 
-      this.newImage();
+      this.showImage(image);
     }, this);
 
     this.region.show(addImageView);
   },
 
-  _workWithImage: function(id, cb){
-    var image = this.collection.get(id);
-    if (image){
-      cb.call(this, image);
-    } else {
-      ImageGallery.showError("Image #" + id + " Not Found");
-    }
-  }
 });
