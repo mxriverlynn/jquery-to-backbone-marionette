@@ -93,6 +93,5 @@ ImageGallery.Controller = Marionette.Controller.extend({
   _deleteError: function(image, response){
     console.log(response);
     ImageGallery.showError("Error Deleting Image");
-  },
-
+  }
 });
