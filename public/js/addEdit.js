@@ -11,7 +11,6 @@ ImageGallery.AddEditImageView = Marionette.ItemView.extend({
   },
 
   initialize: function(options){
-    _.bindAll(this, "saveSuccess", "saveError");
     this.template = options.template;
   },
 
@@ -49,19 +48,7 @@ ImageGallery.AddEditImageView = Marionette.ItemView.extend({
     e.preventDefault();
     var data = Backbone.Syphon.serialize(this);
     this.model.set(data);
-    this.model.save(undefined, {
-      success: this.saveSuccess,
-      error: this.saveError
-    });
-  },
-
-  saveSuccess: function(image, response){
-    this.trigger("image:added", image);
-  },
-
-  saveError: function(image, response){
-    ImageGallery.showError("Error Saving Image");
+    this.trigger("image:save", this.model);
   }
-
 });
 
