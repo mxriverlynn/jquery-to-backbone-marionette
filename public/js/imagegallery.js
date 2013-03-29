@@ -54,10 +54,17 @@ ImageGallery.ImageList = {
 
 ImageGallery.AddEditImage = {
   init: function(){
-    _.bindAll(this, "saveNewImage", "showImagePreview");
+    _.bindAll(this, "saveNewImage", "showImagePreview", "addClicked");
 
-    this.$main = $("#main");
     this.addImageTemplate = _.template($("#add-image-template").html());
+    this.$main = $("#main");
+
+    $("a.add-image").click(this.addClicked);
+  },
+
+  addClicked: function(e){
+    e.preventDefault();
+    this.addNewImage();
   },
 
   addNewImage: function(){

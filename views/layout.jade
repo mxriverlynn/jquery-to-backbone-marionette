@@ -26,9 +26,6 @@ html
           .span10.offset1
             h2 <%= name %>
           .span1.edit
-            a.btn.btn-link(href!='#images/<%= id %>/edit') 
-              i.icon-edit
-              | Edit
         .row
           .span1
             .nav-previous
@@ -42,44 +39,6 @@ html
                   .description <%= description %>
           .span1
             .nav-next
-
-    script#edit-image-template(type='text/html')
-      .row
-        .span5.offset2
-          h1 Edit Image <%= id %>
-        .span2
-          br
-          button.btn.btn-danger#delete(type="submit", name="Delete", value="Delete") 
-            i.icon-remove-circle.icon-white
-            |&nbsp;Delete
-      .row
-        .span7.offset2
-          form.form-horizontal
-            .control-group
-              label.control-label(for='image-url') Image Url: 
-              .controls
-                input#url(type='text', name='url', value!='<%= url %>')
-            .control-group
-              label.control-label(for='preview') Preview: 
-              .controls
-                #image-preview
-                  img#preview(src!='<%= url %>')
-            .control-group
-              label.control-label(for='name') Image Name: 
-              .controls
-                input#name(type='text', name='name', value!='<%= name %>')
-            .control-group
-              label.control-label(for='description') Description: 
-              .controls
-                textarea#description(name='description') <%= description %>
-            .control-group
-              .controls
-                button.btn.btn-primary#save(type='submit', name='Save', value='Save') 
-                  i.icon-ok-sign.icon-white
-                  |&nbsp;Save
-                a.btn.btn-link#cancel(href='/') 
-                  i.icon-ban-circle
-                  |&nbsp;cancel
 
     script#add-image-template(type='text/html')
       .row#add-image-form
@@ -134,7 +93,7 @@ html
           .brand Image Gallery
           ul.nav
             li
-              a(href="#images/new") 
+              a.add-image(href="#") 
                 i.icon-plus
                 | Add Image
 
