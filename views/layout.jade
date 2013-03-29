@@ -15,13 +15,6 @@ html
     script(src='/js/vendor/backbone.marionette.js')
 
     script(src='/js/imagegallery.js')
-    script(src='/js/controller.js')
-    script(src='/js/router.js')
-    script(src='/js/entities.js')
-    script(src='/js/imageList.js')
-    script(src='/js/showImage.js')
-    script(src='/js/addEdit.js')
-    script(src='/js/showError.js')
 
     script#image-preview-template(type='text/html')
       a(href='#')
@@ -90,7 +83,7 @@ html
                   |&nbsp;cancel
 
     script#add-image-template(type='text/html')
-      .row
+      .row#add-image-form
         .span7.offset2
           h1 Add Image
           form.form-horizontal
@@ -128,10 +121,10 @@ html
           | <%= message %>
 
     script
-      var imageData = !{JSON.stringify(images)};
       $(function(){
-        ImageGallery.start({
-          imageData: imageData
+        var imageData = !{JSON.stringify(images)};
+        ImageGallery.init({
+          images: imageData
         });
       });
 
