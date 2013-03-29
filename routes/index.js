@@ -72,29 +72,29 @@ var images = {};
 
 images[1] = {
   id: 1,
-  url: "/img/islands.jpg",
-  name: "Some island",
-  description: "Some islands at sunset"
+  url: "http://placekitten.com/300/200",
+  name: "KITTEH",
+  description: "sooooo cutez!"
 }
 
 images[2] = {
   id: 2,
-  url: "/img/mountain.jpg",
-  name: "A mountain",
-  description: "A mountain with a grassy hill and tree in front of it"
+  url: "http://placekitten.com/301/200",
+  name: "nuther KITTEH",
+  description: "fuzzy cutez!"
 }
 
 images[3] = {
   id: 3,
-  url: "/img/wrench.jpg",
-  name: "A rusty wrench",
-  description: "A close up view of a rusty wrence, with great color and texture on it"
+  url: "http://placekitten.com/300/201",
+  name: "MOAR KITTEH",
+  description: "also cutez!"
 }
 
 images[4] = {
   id: 4,
-  url: "/img/flower.jpg",
-  name: "A purple flower",
-  description: "A purple flower with a water drop hanging off another plant"
+  url: "http://placekitten.com/301/201",
+  name: "THIS KITTEH",
+  description: "sooooo cutez, TOO!"
 }
 
