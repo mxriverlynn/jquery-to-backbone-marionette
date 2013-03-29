@@ -7,13 +7,30 @@ var ImageGallery = {
 
     ImageGallery.AddEditImage.init();
     ImageGallery.AddEditImage.addNewImage();
+
+    ImageGallery.ImageViewer.init();
   }
 };
 
 ImageGallery.ImageList = {
   init: function(){
+    _.bindAll(this, "imageClicked");
+    
     this.$imageList = $("#image-list");
     this.imagePreviewTemplate = _.template($("#image-preview-template").html());
+
+    this.$imageList.on("click", "a.image-preview", this.imageClicked)
+  },
+
+  imageClicked: function(e){
+    e.preventDefault();
+
+    var id = $(e.currentTarget).data("id");
+    var image = _.select(ImageGallery.images, function(image){
+      return image.id === id;
+    })[0];
+
+    ImageGallery.ImageViewer.show(image);
   },
 
   show: function(images){
@@ -41,7 +58,6 @@ ImageGallery.AddEditImage = {
 
     this.$main = $("#main");
     this.addImageTemplate = _.template($("#add-image-template").html());
-    this.showImageTemplate = _.template($("#image-view-template").html());
   },
 
   addNewImage: function(){
@@ -81,8 +97,21 @@ ImageGallery.AddEditImage = {
 
         // show the updated list
         ImageGallery.ImageList.show(ImageGallery.images);
+        ImageGallery.ImageViewer.show(image);
       }
     });
   }
 };
+
+ImageGallery.ImageViewer = {
+  init: function(){
+    this.$main = $("#main");
+    this.showImageTemplate = _.template($("#image-view-template").html());
+  },
+
+  show: function(image){
+    var html = this.showImageTemplate(image);
+    this.$main.html(html);
+  }
+}
 

@@ -17,32 +17,31 @@ html
     script(src='/js/imagegallery.js')
 
     script#image-preview-template(type='text/html')
-      a(href='#')
+      a.image-preview(href='#', data-id!="<%= id %>")
         img(src!='<%= url %>', width='150', height='100', alt!='<%= name %>: <%= description %>')
 
     script#image-view-template(type='text/html')
-      .row
-        .span10.offset1
-          h2 <%= name %>
-        .span1.edit
-          a.btn.btn-link(href!='#images/<%= id %>/edit') 
-            i.icon-edit
-            | Edit
-      .row
-        .span1
-          .nav-previous
-            a(href='#') &larr;
-        .span10
-          .row
-            .span10
-              img(src!='<%= url %>', width='300', height='200', alt!='<%= description %>')
-          .row
-            .span4.offset3
-              .image-footer
-                .description <%= description %>
-        .span1
-          .nav-next
-            a(href='#') &rarr;
+      .image-view
+        .row
+          .span10.offset1
+            h2 <%= name %>
+          .span1.edit
+            a.btn.btn-link(href!='#images/<%= id %>/edit') 
+              i.icon-edit
+              | Edit
+        .row
+          .span1
+            .nav-previous
+          .span10
+            .row
+              .span10
+                img(src!='<%= url %>', width='300', height='200', alt!='<%= description %>')
+            .row
+              .span4.offset3
+                .image-footer
+                  .description <%= description %>
+          .span1
+            .nav-next
 
     script#edit-image-template(type='text/html')
       .row
