@@ -33,13 +33,7 @@ ImageGallery.AddEditImageView = Marionette.ItemView.extend({
 
   deleteImage: function(e){
     e.preventDefault();
-    this.model.destroy({
-      error: this.deleteError
-    });
-  },
-
-  deleteError: function(image, response){
-    ImageGallery.showError("Error Deleting Image");
+    this.trigger("image:deleted", this.model);
   },
 
   cancel: function(e){

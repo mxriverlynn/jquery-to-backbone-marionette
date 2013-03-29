@@ -34,8 +34,20 @@ ImageGallery.Controller = Marionette.Controller.extend({
         this.showImage(image);
       }, this);
 
+      editImageView.on("image:deleted", function(image){
+        image.destroy({
+          success: function(){},
+          error: this.deleteError
+        });
+      }, this);
+
       this.region.show(editImageView);
     });
+  },
+
+  deleteError: function(image, response){
+    console.log(response);
+    ImageGallery.showError("Error Deleting Image");
   },
 
   newImage: function(){

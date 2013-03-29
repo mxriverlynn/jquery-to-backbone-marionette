@@ -25,7 +25,7 @@ exports.updateImage = function (req, res){
 
 exports.deleteImage = function(req, res){
   var image = deleteImage(req.params.id);
-  res.send(image);
+  res.send(JSON.stringify({}));
 };
 
 // --------------------
