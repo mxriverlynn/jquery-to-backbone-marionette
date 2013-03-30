@@ -2,16 +2,14 @@
 
   ImageGallery.ImageList = {
     init: function(){
-      this.imageList = new Marionette.Region({
-        el: "#image-list"
-      });
+      this.$imageList = $("#image-list");
     },
 
     show: function(images){
       var imageList = new ImagePreviewList({
         collection: images
       });
-      this.imageList.show(imageList);
+      this.$imageList.html(imageList.render().$el);
     }
   };
 
