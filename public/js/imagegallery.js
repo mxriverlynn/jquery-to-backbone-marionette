@@ -1,6 +1,6 @@
 var ImageGallery = {
   init: function(options){
-    this.images = options.images;
+    this.images = new ImageGallery.ImageCollection(options.images);
 
     ImageGallery.ImageList.init();
     ImageGallery.ImageList.show(options.images);
@@ -11,3 +11,11 @@ var ImageGallery = {
     ImageGallery.ImageViewer.init();
   }
 };
+
+ImageGallery.Image = Backbone.Model.extend({
+});
+
+ImageGallery.ImageCollection = Backbone.Collection.extend({
+  model: ImageGallery.Image,
+  url: "/images"
+});

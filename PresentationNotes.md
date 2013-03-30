@@ -23,3 +23,15 @@ Persist it w/ .save instead of ajax call
 pass data to model.save
 
 adjust success to use .toJSON of image result
+
+## Section 4: Backbone.Collection
+
+Move Image to ImageGallery.js/ImageGallery.Image
+
+Add ImageCollection w/ url attr
+
+change "this.images" to ImageCollection in ImageGallery.init
+
+show how the image list is still working because of _.each iterating
+
+

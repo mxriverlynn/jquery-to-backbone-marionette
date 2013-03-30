@@ -21,10 +21,6 @@
     }
   };
 
-  var Image = Backbone.Model.extend({
-    urlRoot: "/images"
-  });
-
   var AddImageView = Backbone.View.extend({
       // this.$main.on("change", "#url", this.showImagePreview);
       // this.$main.on("click", "#save", this.saveNewImage);
