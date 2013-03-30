@@ -19,8 +19,11 @@
       var addImageView = new AddImageView();
       this.$main.html(addImageView.render().$el);
     }
-
   };
+
+  var Image = Backbone.Model.extend({
+    urlRoot: "/images"
+  });
 
   var AddImageView = Backbone.View.extend({
       // this.$main.on("change", "#url", this.showImagePreview);
@@ -32,6 +35,7 @@
     },
 
     initialize: function(){
+      this.model = new Image(this.model);
       this.template = _.template($("#add-image-template").html());
     },
 
@@ -52,24 +56,21 @@
       };
 
       // save it to the server
-      $.ajax({
-        url: "/images",
-        type: "POST",
-        dataType: "JSON",
-        data: data,
+      this.model.save(data, {
         success: function(image){
+          var data = image.toJSON();
           // add it to the image list
-          ImageGallery.images.push(image);
+          ImageGallery.images.push(data);
 
           // show the updated list
           ImageGallery.ImageList.show(ImageGallery.images);
-          ImageGallery.ImageViewer.show(image);
+          ImageGallery.ImageViewer.show(data);
         }
       });
     },
 
     render: function(){
-      var html = this.template(this.model);
+      var html = this.template();
       this.$el.html(html);
       return this;
     }
