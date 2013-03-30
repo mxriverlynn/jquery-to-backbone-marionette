@@ -2,14 +2,14 @@
 
   ImageGallery.ImageViewer = {
     init: function(){
-      this.mainRegion = ImageGallery.main;
+      this.$main = $("#main");
     },
 
     show: function(image){
       var imageView = new ImageView({
         model: image
       });
-      this.mainRegion.show(imageView);
+      this.$main.html(imageView.render().$el);
     }
   };
 

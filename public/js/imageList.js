@@ -2,7 +2,9 @@
 
   ImageGallery.ImageList = {
     init: function(){
-      this.imageList = ImageGallery.imageList;
+      this.imageList = new Marionette.Region({
+        el: "#image-list"
+      });
     },
 
     show: function(images){
