@@ -14,7 +14,6 @@
   };
 
   var ImageView = Backbone.View.extend({
-    
     initialize: function(){
       this.template = _.template($("#image-view-template").html());
     },
