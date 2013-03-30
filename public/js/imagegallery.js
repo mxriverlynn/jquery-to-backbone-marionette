@@ -3,7 +3,7 @@ var ImageGallery = {
     this.images = new ImageGallery.ImageCollection(options.images);
 
     ImageGallery.ImageList.init();
-    ImageGallery.ImageList.show(options.images);
+    ImageGallery.ImageList.show(this.images);
 
     ImageGallery.AddEditImage.init();
     ImageGallery.AddEditImage.addNewImage();

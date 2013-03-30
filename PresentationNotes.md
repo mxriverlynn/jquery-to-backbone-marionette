@@ -1,10 +1,12 @@
-## Section 1: jQuery and first Backbone.View
+## Section 0: jQuery
 
 Review the current jQuery app code
 
+## Section 1: Backbone.View
+
 Convert the image viewer to a Backbone.View
 
-## Section 2: Form manipulation
+## Section 2: View events and use
 
 Convert the AddImageForm to a Backbone.View
 
@@ -34,4 +36,9 @@ change "this.images" to ImageCollection in ImageGallery.init
 
 show how the image list is still working because of _.each iterating
 
+show how image click is broken... 
+
+## Section 5: ItemView, CollectionView
+
+add ImagePreview to ImageList.js
 

@@ -1,40 +1,49 @@
-ImageGallery.ImageList = {
-  init: function(){
-    _.bindAll(this, "imageClicked");
-    
-    this.$imageList = $("#image-list");
-    this.imagePreviewTemplate = _.template($("#image-preview-template").html());
+(function(ImageGallery){
 
-    this.$imageList.on("click", "a.image-preview", this.imageClicked)
-  },
+  ImageGallery.ImageList = {
+    init: function(){
+      _.bindAll(this, "imageClicked");
+      
+      this.$imageList = $("#image-list");
 
-  imageClicked: function(e){
-    e.preventDefault();
+      this.$imageList.on("click", "a.image-preview", this.imageClicked)
+    },
 
-    var id = $(e.currentTarget).data("id");
-    var image = _.select(ImageGallery.images, function(image){
-      return image.id === id;
-    })[0];
+    imageClicked: function(e){
+      e.preventDefault();
 
-    ImageGallery.ImageViewer.show(image);
-  },
+      var id = $(e.currentTarget).data("id");
+      var image = _.select(ImageGallery.images, function(image){
+        return image.id === id;
+      })[0];
 
-  show: function(images){
-    // resize the display area
-    var width = (images.length * 160) + "px";
-    this.$imageList.css({width: width});
-    
-    // render all the images to show
-    var renderedImages = [];
-    _.each(images, function(image){
-      var html = this.imagePreviewTemplate(image);
-      renderedImages.push(html);
-    }, this);
+      ImageGallery.ImageViewer.show(image);
+    },
 
-    // show the list
-    this.$imageList.empty();
-    this.$imageList.html(renderedImages);
-  }
+    show: function(images){
+      // resize the display area
+      var width = (images.length * 160) + "px";
+      this.$imageList.css({width: width});
+      
+      // render all the images to show
+      var renderedImages = [];
+      images.each(function(image){
+        var imageView = new ImagePreview({
+          model: image
+        });
+        renderedImages.push(imageView.render().$el);
+      }, this);
 
-};
+      // show the list
+      this.$imageList.empty();
+      this.$imageList.html(renderedImages);
+    }
 
+  };
+
+  var ImagePreview = Marionette.ItemView.extend({
+    tagName: "span",
+    template: "#image-preview-template"
+  });
+
+})(ImageGallery);
