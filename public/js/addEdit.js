@@ -4,7 +4,7 @@
     init: function(){
       _.bindAll(this, "addClicked");
 
-      this.$main = $("#main");
+      this.mainRegion = ImageGallery.main;
 
       $("a.add-image").click(this.addClicked);
     },
@@ -19,14 +19,11 @@
       var addImageView = new AddImageView({
         collection: ImageGallery.images
       });
-      this.$main.html(addImageView.render().$el);
+      this.mainRegion.show(addImageView);
     }
   };
 
   var AddImageView = Backbone.View.extend({
-      // this.$main.on("change", "#url", this.showImagePreview);
-      // this.$main.on("click", "#save", this.saveNewImage);
-
     events: {
       "change #url": "showImagePreview",
       "click #save": "saveNewImage"

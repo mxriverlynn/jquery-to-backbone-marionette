@@ -1,4 +1,4 @@
-var ImageGallery = {
+var ImageGallery = new Marionette.Application({
   init: function(options){
     this.images = new ImageGallery.ImageCollection(options.images);
 
@@ -10,7 +10,12 @@ var ImageGallery = {
 
     ImageGallery.ImageViewer.init();
   }
-};
+});
+
+ImageGallery.addRegions({
+  main: "#main",
+  imageList: "#image-list"
+});
 
 ImageGallery.Image = Backbone.Model.extend({
 });

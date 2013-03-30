@@ -72,3 +72,18 @@ move el resizing code to ImagePreviewList as "updateSize" function
 
 change ImageList.show to use new ImagePreviewList
 
+set ImagePreviewList tagName to ul
+
+set ImagePreview tagName to li
+
+set "wait: true" on addEdit.create
+
+call updateSize on image add
+
+## Section 7: Zombies and Regions
+
+brief discussion on zombies. show a view with this.model.on and it's zombie effect, and how to fix w/ this.listenTo
+
+replace this.$imageList with a region in ImageList.init
+
+update ImageList.show function to use region.show

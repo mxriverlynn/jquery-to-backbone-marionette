@@ -2,14 +2,14 @@
 
   ImageGallery.ImageList = {
     init: function(){
-      this.$imageList = $("#image-list");
+      this.imageList = ImageGallery.imageList;
     },
 
     show: function(images){
       var imageList = new ImagePreviewList({
         collection: images
       });
-      this.$imageList.html(imageList.render().$el);
+      this.imageList.show(imageList);
     }
   };
 
