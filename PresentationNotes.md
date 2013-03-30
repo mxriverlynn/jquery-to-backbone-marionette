@@ -111,3 +111,9 @@ move ImageList initializer to the right file
 move AddEdit initialize to the right file
 
 move ImageViewer initialize to the right file
+
+use "initialize:before" to set up images collection
+
+## Section 10: Modules
+
+... if I have time... go through the module setup for AddEdit
