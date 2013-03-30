@@ -6,28 +6,15 @@
     },
 
     show: function(images){
-      // resize the display area
-      var width = (images.length * 160) + "px";
-      this.$imageList.css({width: width});
-      
-      // render all the images to show
-      var renderedImages = [];
-      images.each(function(image){
-        var imageView = new ImagePreview({
-          model: image
-        });
-        renderedImages.push(imageView.render().$el);
-      }, this);
-
-      // show the list
-      this.$imageList.empty();
-      this.$imageList.html(renderedImages);
+      var imageList = new ImagePreviewList({
+        collection: images
+      });
+      this.$imageList.html(imageList.render().$el);
     }
-
   };
 
   var ImagePreview = Marionette.ItemView.extend({
-    tagName: "span",
+    tagName: "li",
     template: "#image-preview-template",
 
     events: {
@@ -38,6 +25,21 @@
       e.preventDefault();
       var image = this.model;
       ImageGallery.ImageViewer.show(image);
+    }
+  });
+
+  var ImagePreviewList = Marionette.CollectionView.extend({
+    tagName: "ul",
+    itemView: ImagePreview,
+
+    initialize: function(){
+      this.listenTo(this.collection, "add", this.updateSize);
+      this.updateSize();
+    },
+
+    updateSize: function(){
+      var width = (this.collection.length * 160) + "px";
+      this.$el.css({width: width});
     }
   });
 

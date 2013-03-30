@@ -54,6 +54,7 @@
 
       // save it to the server
       this.collection.create(data, {
+        wait: true,
         success: function(image){
           // add it to the image list
           ImageGallery.images.add(image);

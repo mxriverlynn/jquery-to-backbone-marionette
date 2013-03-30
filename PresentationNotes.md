@@ -60,4 +60,15 @@ use this.model instead of finding the image from the collection
 
 call ImageView.show with image.toJSON()
 
+convert ImageViewer to use Image model
+
+convert AddEdit to use ImageGallery.images as a proper collection (images.add)
+
 ## Section 6: CollectionView
+
+Create ImagePreviewList in ImageList.js
+
+move el resizing code to ImagePreviewList as "updateSize" function
+
+change ImageList.show to use new ImagePreviewList
+
