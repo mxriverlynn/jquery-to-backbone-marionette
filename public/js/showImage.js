@@ -13,16 +13,8 @@
     }
   };
 
-  var ImageView = Backbone.View.extend({
-    initialize: function(){
-      this.template = _.template($("#image-view-template").html());
-    },
-
-    render: function(){
-      var html = this.template(this.model);
-      this.$el.html(html);
-      return this;
-    }
+  var ImageView = Marionette.ItemView.extend({
+    template: "#image-view-template"
   });
 
 })(ImageGallery);

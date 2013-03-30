@@ -16,7 +16,9 @@
 
     addNewImage: function(){
       // render the form and show it
-      var addImageView = new AddImageView();
+      var addImageView = new AddImageView({
+        collection: ImageGallery.images
+      });
       this.$main.html(addImageView.render().$el);
     }
   };
@@ -31,7 +33,6 @@
     },
 
     initialize: function(){
-      this.model = new Image(this.model);
       this.template = _.template($("#add-image-template").html());
     },
 
@@ -52,15 +53,14 @@
       };
 
       // save it to the server
-      this.model.save(data, {
+      this.collection.create(data, {
         success: function(image){
-          var data = image.toJSON();
           // add it to the image list
-          ImageGallery.images.push(data);
+          ImageGallery.images.add(image);
 
           // show the updated list
           ImageGallery.ImageList.show(ImageGallery.images);
-          ImageGallery.ImageViewer.show(data);
+          ImageGallery.ImageViewer.show(image);
         }
       });
     },

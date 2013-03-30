@@ -34,11 +34,30 @@ Add ImageCollection w/ url attr
 
 change "this.images" to ImageCollection in ImageGallery.init
 
-show how the image list is still working because of _.each iterating
+image list is still working
 
-show how image click is broken... 
+show how image add is broken
 
-## Section 5: ItemView, CollectionView
+change the Add view to use this.collection.create instead of model.save
 
-add ImagePreview to ImageList.js
+show that image view is broken
 
+## Section 5: ItemView
+
+add ImagePreview as Backbone.View to ImageList.js
+
+Use it to show the individual images in preview list
+
+iterate images.each instead of _.each(images
+
+set tagName to "span" on ImagePreview
+
+convert ImagePreview to Marionette.ItemView
+
+move "click a.image-preview" to ImagePreview events, along with imageClicked method
+
+use this.model instead of finding the image from the collection
+
+call ImageView.show with image.toJSON()
+
+## Section 6: CollectionView
