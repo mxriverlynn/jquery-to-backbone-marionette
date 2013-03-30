@@ -80,10 +80,34 @@ set "wait: true" on addEdit.create
 
 call updateSize on image add
 
-## Section 7: Zombies and Regions
-
-brief discussion on zombies. show a view with this.model.on and it's zombie effect, and how to fix w/ this.listenTo
+## Section 7: Regions
 
 replace this.$imageList with a region in ImageList.init
 
 update ImageList.show function to use region.show
+
+## Section 8: Application object and main region
+
+show $("#main") being done twice: showImage.js and addEdit.js
+
+change ImageGallery object to Marionette.Application, leaving "init" function
+
+call ImageGallery.addRegions({main: "#main", imageList: "#image-list"})
+
+update imageList.js w/ app region
+
+update addEdit.js w/ app region
+
+update showImage.js w/ app region
+
+## Section 9: App Initializer
+
+change ImageGallery.init function to initializer method
+
+call ImageGallery.start in the layout.jade file
+
+move ImageList initializer to the right file
+
+move AddEdit initialize to the right file
+
+move ImageViewer initialize to the right file

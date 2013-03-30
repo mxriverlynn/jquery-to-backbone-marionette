@@ -17,4 +17,8 @@
     template: "#image-view-template"
   });
 
+  ImageGallery.addInitializer(function(){
+    ImageGallery.ImageViewer.init();
+  });
+
 })(ImageGallery);

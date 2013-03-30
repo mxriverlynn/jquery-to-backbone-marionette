@@ -70,4 +70,9 @@
     }
   });
 
+  ImageGallery.addInitializer(function(){
+    ImageGallery.AddEditImage.init();
+    ImageGallery.AddEditImage.addNewImage();
+  });
+
 })(ImageGallery);

@@ -43,4 +43,9 @@
     }
   });
 
+  ImageGallery.addInitializer(function(){
+    ImageGallery.ImageList.init();
+    ImageGallery.ImageList.show(ImageGallery.images);
+  });
+
 })(ImageGallery);

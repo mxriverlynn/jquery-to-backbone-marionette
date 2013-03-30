@@ -1,15 +1,7 @@
-var ImageGallery = new Marionette.Application({
-  init: function(options){
-    this.images = new ImageGallery.ImageCollection(options.images);
+var ImageGallery = new Marionette.Application();
 
-    ImageGallery.ImageList.init();
-    ImageGallery.ImageList.show(this.images);
-
-    ImageGallery.AddEditImage.init();
-    ImageGallery.AddEditImage.addNewImage();
-
-    ImageGallery.ImageViewer.init();
-  }
+ImageGallery.on("initialize:before", function(options){
+  ImageGallery.images = new ImageGallery.ImageCollection(options.images);
 });
 
 ImageGallery.addRegions({
