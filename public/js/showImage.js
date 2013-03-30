@@ -1,25 +1,11 @@
-ImageGallery.ImageView = Backbone.View.extend({
-  template: "#image-view-template",
-  className: "image-view",
-
-  events: {
-    "click .nav-previous a": "previousImage",
-    "click .nav-next a": "nextImage"
+ImageGallery.ImageViewer = {
+  init: function(){
+    this.$main = $("#main");
+    this.showImageTemplate = _.template($("#image-view-template").html());
   },
 
-  previousImage: function(e){
-    e.preventDefault();
-    ImageGallery.vent.trigger("image:previous");
-  },
-
-  nextImage: function(e){
-    e.preventDefault();
-    ImageGallery.vent.trigger("image:next");
-  },
-
-  render: function(){
-    var template = $(this.template).html();
-    var html = _.template(template, this.model.toJSON());
-    $(this.el).html(html);
+  show: function(image){
+    var html = this.showImageTemplate(image);
+    this.$main.html(html);
   }
-});
+};

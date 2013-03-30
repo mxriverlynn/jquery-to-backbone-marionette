@@ -1,54 +1,58 @@
-ImageGallery.AddEditImageView = Marionette.ItemView.extend({
-  id: "add-image-form",
+ImageGallery.AddEditImage = {
+  init: function(){
+    _.bindAll(this, "saveNewImage", "showImagePreview", "addClicked");
 
-  events: {
-    "change #name": "nameChanged",
-    "change #description": "descriptionChanged",
-    "change #url": "urlChanged",
-    "click #save": "saveImage",
-    "click #cancel": "cancel",
-    "click #delete": "deleteImage"
+    this.addImageTemplate = _.template($("#add-image-template").html());
+
+    this.$main = $("#main");
+    this.$main.on("change", "#url", this.showImagePreview);
+    this.$main.on("click", "#save", this.saveNewImage);
+
+    $("a.add-image").click(this.addClicked);
   },
 
-  initialize: function(options){
-    this.template = options.template;
+  addNewImage: function(){
+    // render the form and show it
+    var addForm = this.addImageTemplate();
+    this.$main.html(addForm);
   },
 
-  nameChanged: function(e){
-    var value = $(e.currentTarget).val();
-    this.model.set({name: value});
-  },
-
-  descriptionChanged: function(e){
-    var value = $(e.currentTarget).val();
-    this.model.set({description: value});
-  },
-
-  urlChanged: function(e){
-    var value = $(e.currentTarget).val();
-    this.model.set({url: value});
-    this.$("#preview").attr("src", value);
-  },
-
-  deleteImage: function(e){
+  addClicked: function(e){
     e.preventDefault();
-    this.trigger("image:deleted", this.model);
+    this.addNewImage();
   },
 
-  cancel: function(e){
+  showImagePreview: function(e){
     e.preventDefault();
-    if (this.model.isNew()){
-      this.render();
-    } else {
-      this.model.select();
-    }
+    var url = $(e.currentTarget).val();
+    this.$main.find("#preview").attr("src", url);
   },
 
-  saveImage: function(e){
+  saveNewImage: function(e){
     e.preventDefault();
-    var data = Backbone.Syphon.serialize(this);
-    this.model.set(data);
-    this.trigger("image:save", this.model);
+
+    // get the data for the new image
+    var data = {
+      url: this.$main.find("#url").val(),
+      name: this.$main.find("#name").val(),
+      description: this.$main.find("#description").val(),
+    };
+
+    // save it to the server
+    $.ajax({
+      url: "/images",
+      type: "POST",
+      dataType: "JSON",
+      data: data,
+      success: function(image){
+        // add it to the image list
+        ImageGallery.images.push(image);
+
+        // show the updated list
+        ImageGallery.ImageList.show(ImageGallery.images);
+        ImageGallery.ImageViewer.show(image);
+      }
+    });
   }
-});
+};
 

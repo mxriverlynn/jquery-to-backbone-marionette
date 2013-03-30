@@ -1,72 +1,40 @@
-ImageGallery.module("ImageList", function(Mod, App, Backbone, Marionette, $, _){
+ImageGallery.ImageList = {
+  init: function(){
+    _.bindAll(this, "imageClicked");
+    
+    this.$imageList = $("#image-list");
+    this.imagePreviewTemplate = _.template($("#image-preview-template").html());
 
-  var ImagePreview = Marionette.ItemView.extend({
-    tagName: "li",
+    this.$imageList.on("click", "a.image-preview", this.imageClicked)
+  },
 
-    className: "image-list-preview",
+  imageClicked: function(e){
+    e.preventDefault();
 
-    template: "#image-preview-template",
+    var id = $(e.currentTarget).data("id");
+    var image = _.select(ImageGallery.images, function(image){
+      return image.id === id;
+    })[0];
 
-    triggers: {
-      "click a": "image:selected"
-    },
+    ImageGallery.ImageViewer.show(image);
+  },
 
-    initialize: function(){
-      this.model.bind("model:selected", this.imageSelected, this);
-      this.model.bind("model:deselected", this.imageDeselected, this);
-      this.model.bind("change", this.render, this);
-    },
+  show: function(images){
+    // resize the display area
+    var width = (images.length * 160) + "px";
+    this.$imageList.css({width: width});
+    
+    // render all the images to show
+    var renderedImages = [];
+    _.each(images, function(image){
+      var html = this.imagePreviewTemplate(image);
+      renderedImages.push(html);
+    }, this);
 
-    imageSelected: function(){
-      this.$("img").addClass("selected");
-    },
+    // show the list
+    this.$imageList.empty();
+    this.$imageList.html(renderedImages);
+  }
 
-    imageDeselected: function(){
-      this.$("img").removeClass("selected");
-    }
-  });
+};
 
-  var ImageListView = Marionette.CollectionView.extend({
-    tagName: "ul",
-    itemView: ImagePreview,
-
-    initialize: function(){
-      this.on("before:item:added", this.adjustScrollSize, this);
-      this.on("item:removed", this.adjustScrollSize, this);
-    },
-
-    adjustScrollSize: function(){
-      var newWidth = this.collection.length * 160;
-      this.$el.css({width: newWidth + "px"});
-    }
-  });
-
-  var Controller = Marionette.Controller.extend({
-    initialize: function(options){
-      this.region = options.region;
-      this.images = options.images;
-    },
-
-    show: function(){
-      var imageListView = new ImageListView({
-        collection: this.images
-      });
-
-      this.listenTo(imageListView, "itemview:image:selected", function(options){
-        options.model.select();
-      });
-
-      ImageGallery.imageList.show(imageListView);
-    }
-  });
-
-  this.addInitializer(function(options){
-    var controller = new Controller({
-      region: ImageGallery.imageList,
-      images: options.images
-    });
-
-    controller.show();
-  });
-
-});
